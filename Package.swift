@@ -21,7 +21,7 @@ let package = Package(
         .package(path: "../swift-algebra-linear-primitives"),
         .package(path: "../swift-affine-primitives"),
         .package(path: "../swift-dimension-primitives"),
-        .package(url: "https://github.com/apple/swift-numerics", from: "1.0.0"),
+        .package(path: "../swift-numeric-primitives"),
         .package(path: "../swift-test-support-primitives"),
     ],
     targets: [
@@ -31,14 +31,14 @@ let package = Package(
                 .product(name: "Algebra Linear Primitives", package: "swift-algebra-linear-primitives"),
                 .product(name: "Affine Primitives", package: "swift-affine-primitives"),
                 .product(name: "Dimension Primitives", package: "swift-dimension-primitives"),
-                .product(name: "RealModule", package: "swift-numerics"),
+                .product(name: "Real Primitives", package: "swift-numeric-primitives"),
             ]
         ),
         .testTarget(
             name: "Symmetry Primitives Tests",
             dependencies: [
                 "Symmetry Primitives",
-                .product(name: "RealModule", package: "swift-numerics"),
+                .product(name: "Real Primitives", package: "swift-numeric-primitives"),
                 .product(name: "Test Support Primitives", package: "swift-test-support-primitives"),
             ]
         ),
