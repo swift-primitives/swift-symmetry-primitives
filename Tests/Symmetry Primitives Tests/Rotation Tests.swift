@@ -3,7 +3,7 @@
 import Affine_Primitives
 import Algebra_Linear_Primitives
 import Dimension_Primitives
-import RealModule
+import Real_Primitives
 import Testing
 
 @testable import Symmetry_Primitives
