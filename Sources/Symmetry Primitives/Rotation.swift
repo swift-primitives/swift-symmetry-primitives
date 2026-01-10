@@ -4,7 +4,7 @@
 public import Algebra_Linear_Primitives
 public import Dimension_Primitives
 
-public import RealModule
+public import Real_Primitives
 
 /// An N-dimensional rotation in Euclidean space.
 ///
@@ -119,15 +119,15 @@ extension Rotation where N == 2, Scalar: ExpressibleByIntegerLiteral {
 
 // MARK: - 2D Rotation
 
-extension Rotation where N == 2, Scalar: Real {
+extension Rotation where N == 2, Scalar: Numeric.Real {
     /// Rotation angle in radians.
     public var angle: Radian<Scalar> {
-        get { Radian(Scalar.atan2(y: matrix[1][0], x: matrix[0][0])) }
+        get { Radian(Scalar.math.atan2(matrix[1][0], matrix[0][0])) }
         set { self = Self(angle: newValue) }
     }
 }
 
-extension Rotation where N == 2, Scalar: Real {
+extension Rotation where N == 2, Scalar: Numeric.Real {
     /// Creates a 2D rotation from an angle in radians.
     @inlinable
     public init(angle: Radian<Scalar>) {
@@ -144,7 +144,7 @@ extension Rotation where N == 2, Scalar: Real {
     }
 }
 
-extension Rotation where N == 2, Scalar: Real & BinaryFloatingPoint {
+extension Rotation where N == 2, Scalar: Numeric.Real & BinaryFloatingPoint {
     /// Creates a 2D rotation from an angle in degrees.
     @inlinable
     public init(degrees: Degree<Scalar>) {
@@ -152,7 +152,7 @@ extension Rotation where N == 2, Scalar: Real & BinaryFloatingPoint {
     }
 }
 
-extension Rotation where N == 2, Scalar: Real {
+extension Rotation where N == 2, Scalar: Numeric.Real {
     /// Creates a 2D rotation from precomputed cosine and sine values.
     @inlinable
     public init(cos: Scalar, sin: Scalar) {
@@ -236,7 +236,7 @@ extension Rotation where N == 2, Scalar: BinaryFloatingPoint {
 
 // MARK: - 2D Convenience Operations
 
-extension Rotation where N == 2, Scalar: Real & BinaryFloatingPoint {
+extension Rotation where N == 2, Scalar: Numeric.Real & BinaryFloatingPoint {
     /// Rotates by an additional angle in radians.
     @inlinable
     public func rotated(by angle: Radian<Scalar>) -> Self {
@@ -244,7 +244,7 @@ extension Rotation where N == 2, Scalar: Real & BinaryFloatingPoint {
     }
 }
 
-extension Rotation where N == 2, Scalar: Real & BinaryFloatingPoint {
+extension Rotation where N == 2, Scalar: Numeric.Real & BinaryFloatingPoint {
     /// Rotates by an additional angle in degrees.
     @inlinable
     public func rotated(by degrees: Degree<Scalar>) -> Self {
@@ -254,7 +254,7 @@ extension Rotation where N == 2, Scalar: Real & BinaryFloatingPoint {
 
 // MARK: - Common 2D Rotations
 
-extension Rotation where N == 2, Scalar: Real {
+extension Rotation where N == 2, Scalar: Numeric.Real {
     /// 90-degree counter-clockwise rotation.
     @inlinable
     public static var quarterTurn: Self {
@@ -262,7 +262,7 @@ extension Rotation where N == 2, Scalar: Real {
     }
 }
 
-extension Rotation where N == 2, Scalar: Real {
+extension Rotation where N == 2, Scalar: Numeric.Real {
     /// 180-degree rotation.
     @inlinable
     public static var halfTurn: Self {
@@ -270,7 +270,7 @@ extension Rotation where N == 2, Scalar: Real {
     }
 }
 
-extension Rotation where N == 2, Scalar: Real {
+extension Rotation where N == 2, Scalar: Numeric.Real {
     /// 90-degree clockwise rotation.
     @inlinable
     public static var quarterTurnClockwise: Self {
