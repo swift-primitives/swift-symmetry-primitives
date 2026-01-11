@@ -30,10 +30,10 @@ struct `Rotation Tests` {
         let angle = .pi / 4.0
 
         // Check that matrix represents rotation by π/4
-        #expect(abs(rotation.matrix[0][0] - Double.cos(angle)) < 1e-10)
-        #expect(abs(rotation.matrix[1][1] - Double.cos(angle)) < 1e-10)
-        #expect(abs(rotation.matrix[1][0] - Double.sin(angle)) < 1e-10)
-        #expect(abs(rotation.matrix[0][1] + Double.sin(angle)) < 1e-10)
+        #expect(abs(rotation.matrix[0][0] - Double.math.cos(angle)) < 1e-10)
+        #expect(abs(rotation.matrix[1][1] - Double.math.cos(angle)) < 1e-10)
+        #expect(abs(rotation.matrix[1][0] - Double.math.sin(angle)) < 1e-10)
+        #expect(abs(rotation.matrix[0][1] + Double.math.sin(angle)) < 1e-10)
     }
 
     @Test
@@ -41,10 +41,10 @@ struct `Rotation Tests` {
         let rotation = Rotation<2, Double>(degrees: Degree(90))
 
         // 90 degrees is π/2 radians
-        #expect(abs(rotation.matrix[0][0]) < 1e-10)  // Double.cos(π/2) ≈ 0
-        #expect(abs(rotation.matrix[1][1]) < 1e-10)  // Double.cos(π/2) ≈ 0
-        #expect(abs(rotation.matrix[1][0] - 1) < 1e-10)  // Double.sin(π/2) ≈ 1
-        #expect(abs(rotation.matrix[0][1] + 1) < 1e-10)  // -Double.sin(π/2) ≈ -1
+        #expect(abs(rotation.matrix[0][0]) < 1e-10)  // Double.math.cos(π/2) ≈ 0
+        #expect(abs(rotation.matrix[1][1]) < 1e-10)  // Double.math.cos(π/2) ≈ 0
+        #expect(abs(rotation.matrix[1][0] - 1) < 1e-10)  // Double.math.sin(π/2) ≈ 1
+        #expect(abs(rotation.matrix[0][1] + 1) < 1e-10)  // -Double.math.sin(π/2) ≈ -1
     }
 
     @Test
@@ -215,9 +215,9 @@ struct `Rotation Tests` {
         let rotation = Rotation<2, Double>(angle: .pi / 4)
         let linear: Linear<Double, Void>.Matrix<2, 2> = rotation.linear()
 
-        #expect(abs(linear.a - Double.cos(.pi / 4)) < 1e-10)
-        #expect(abs(linear.b + Double.sin(.pi / 4)) < 1e-10)
-        #expect(abs(linear.c - Double.sin(.pi / 4)) < 1e-10)
-        #expect(abs(linear.d - Double.cos(.pi / 4)) < 1e-10)
+        #expect(abs(linear.a - Double.math.cos(.pi / 4)) < 1e-10)
+        #expect(abs(linear.b + Double.math.sin(.pi / 4)) < 1e-10)
+        #expect(abs(linear.c - Double.math.sin(.pi / 4)) < 1e-10)
+        #expect(abs(linear.d - Double.math.cos(.pi / 4)) < 1e-10)
     }
 }

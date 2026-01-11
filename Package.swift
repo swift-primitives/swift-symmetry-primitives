@@ -22,7 +22,7 @@ let package = Package(
         .package(path: "../swift-affine-primitives"),
         .package(path: "../swift-dimension-primitives"),
         .package(path: "../swift-numeric-primitives"),
-        .package(path: "../swift-test-support-primitives"),
+        .package(path: "../swift-test-primitives"),
     ],
     targets: [
         .target(
@@ -39,7 +39,7 @@ let package = Package(
             dependencies: [
                 "Symmetry Primitives",
                 .product(name: "Real Primitives", package: "swift-numeric-primitives"),
-                .product(name: "Test Support Primitives", package: "swift-test-support-primitives"),
+                .product(name: "Test Primitives", package: "swift-test-primitives"),
             ]
         ),
     ],

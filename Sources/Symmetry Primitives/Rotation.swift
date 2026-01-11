@@ -117,17 +117,15 @@ extension Rotation where N == 2, Scalar: ExpressibleByIntegerLiteral {
     }
 }
 
-// MARK: - 2D Rotation
+// MARK: - 2D Rotation - Double
 
-extension Rotation where N == 2, Scalar: Numeric.Real {
+extension Rotation where N == 2, Scalar == Double {
     /// Rotation angle in radians.
     public var angle: Radian<Scalar> {
         get { Radian(Scalar.math.atan2(matrix[1][0], matrix[0][0])) }
         set { self = Self(angle: newValue) }
     }
-}
 
-extension Rotation where N == 2, Scalar: Numeric.Real {
     /// Creates a 2D rotation from an angle in radians.
     @inlinable
     public init(angle: Radian<Scalar>) {
@@ -142,9 +140,7 @@ extension Rotation where N == 2, Scalar: Numeric.Real {
         m[1][1] = c
         self.init(matrix: m)
     }
-}
 
-extension Rotation where N == 2, Scalar: Numeric.Real & BinaryFloatingPoint {
     /// Creates a 2D rotation from an angle in degrees.
     @inlinable
     public init(degrees: Degree<Scalar>) {
@@ -152,7 +148,40 @@ extension Rotation where N == 2, Scalar: Numeric.Real & BinaryFloatingPoint {
     }
 }
 
-extension Rotation where N == 2, Scalar: Numeric.Real {
+// MARK: - 2D Rotation - Float
+
+extension Rotation where N == 2, Scalar == Float {
+    /// Rotation angle in radians.
+    public var angle: Radian<Scalar> {
+        get { Radian(Scalar.math.atan2(matrix[1][0], matrix[0][0])) }
+        set { self = Self(angle: newValue) }
+    }
+
+    /// Creates a 2D rotation from an angle in radians.
+    @inlinable
+    public init(angle: Radian<Scalar>) {
+        let c = angle.cos.value
+        let s = angle.sin.value
+        var m = InlineArray<2, InlineArray<2, Scalar>>(
+            repeating: InlineArray<2, Scalar>(repeating: .zero)
+        )
+        m[0][0] = c
+        m[0][1] = -s
+        m[1][0] = s
+        m[1][1] = c
+        self.init(matrix: m)
+    }
+
+    /// Creates a 2D rotation from an angle in degrees.
+    @inlinable
+    public init(degrees: Degree<Scalar>) {
+        self.init(angle: degrees.radians)
+    }
+}
+
+// MARK: - 2D Rotation - Generic
+
+extension Rotation where N == 2, Scalar: AdditiveArithmetic & SignedNumeric {
     /// Creates a 2D rotation from precomputed cosine and sine values.
     @inlinable
     public init(cos: Scalar, sin: Scalar) {
@@ -234,43 +263,67 @@ extension Rotation where N == 2, Scalar: BinaryFloatingPoint {
     }
 }
 
-// MARK: - 2D Convenience Operations
+// MARK: - 2D Convenience Operations - Double
 
-extension Rotation where N == 2, Scalar: Numeric.Real & BinaryFloatingPoint {
+extension Rotation where N == 2, Scalar == Double {
     /// Rotates by an additional angle in radians.
     @inlinable
     public func rotated(by angle: Radian<Scalar>) -> Self {
         concatenating(Self(angle: angle))
     }
-}
 
-extension Rotation where N == 2, Scalar: Numeric.Real & BinaryFloatingPoint {
     /// Rotates by an additional angle in degrees.
     @inlinable
     public func rotated(by degrees: Degree<Scalar>) -> Self {
         rotated(by: degrees.radians)
     }
-}
 
-// MARK: - Common 2D Rotations
-
-extension Rotation where N == 2, Scalar: Numeric.Real {
     /// 90-degree counter-clockwise rotation.
     @inlinable
     public static var quarterTurn: Self {
         Self(angle: Radian<Scalar>(Scalar.pi / 2))
     }
-}
 
-extension Rotation where N == 2, Scalar: Numeric.Real {
     /// 180-degree rotation.
     @inlinable
     public static var halfTurn: Self {
         Self(angle: Radian<Scalar>(Scalar.pi))
     }
+
+    /// 90-degree clockwise rotation.
+    @inlinable
+    public static var quarterTurnClockwise: Self {
+        Self(angle: Radian<Scalar>(-Scalar.pi / 2))
+    }
 }
 
-extension Rotation where N == 2, Scalar: Numeric.Real {
+// MARK: - 2D Convenience Operations - Float
+
+extension Rotation where N == 2, Scalar == Float {
+    /// Rotates by an additional angle in radians.
+    @inlinable
+    public func rotated(by angle: Radian<Scalar>) -> Self {
+        concatenating(Self(angle: angle))
+    }
+
+    /// Rotates by an additional angle in degrees.
+    @inlinable
+    public func rotated(by degrees: Degree<Scalar>) -> Self {
+        rotated(by: degrees.radians)
+    }
+
+    /// 90-degree counter-clockwise rotation.
+    @inlinable
+    public static var quarterTurn: Self {
+        Self(angle: Radian<Scalar>(Scalar.pi / 2))
+    }
+
+    /// 180-degree rotation.
+    @inlinable
+    public static var halfTurn: Self {
+        Self(angle: Radian<Scalar>(Scalar.pi))
+    }
+
     /// 90-degree clockwise rotation.
     @inlinable
     public static var quarterTurnClockwise: Self {

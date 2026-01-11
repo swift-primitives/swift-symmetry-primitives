@@ -19,8 +19,8 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
 
         // Check linear part matches rotation matrix
         let angle = Double.pi / 4
-        let expectedCos = Double.cos(angle)
-        let expectedSin = Double.sin(angle)
+        let expectedCos = Double.math.cos(angle)
+        let expectedSin = Double.math.sin(angle)
 
         #expect(abs(transform.linear.a - expectedCos) < 1e-10)
         #expect(abs(transform.linear.b + expectedSin) < 1e-10)
@@ -48,11 +48,11 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
         let rotation = Rotation<2, Double>.quarterTurn
         let transform = Affine<Double, Void>.Transform(rotation)
 
-        // 90 degrees: Double.cos(π/2) ≈ 0, Double.sin(π/2) ≈ 1
-        #expect(abs(transform.linear.a) < 1e-10)  // Double.cos(π/2)
-        #expect(abs(transform.linear.b + 1) < 1e-10)  // -Double.sin(π/2)
-        #expect(abs(transform.linear.c - 1) < 1e-10)  // Double.sin(π/2)
-        #expect(abs(transform.linear.d) < 1e-10)  // Double.cos(π/2)
+        // 90 degrees: Double.math.cos(π/2) ≈ 0, Double.math.sin(π/2) ≈ 1
+        #expect(abs(transform.linear.a) < 1e-10)  // Double.math.cos(π/2)
+        #expect(abs(transform.linear.b + 1) < 1e-10)  // -Double.math.sin(π/2)
+        #expect(abs(transform.linear.c - 1) < 1e-10)  // Double.math.sin(π/2)
+        #expect(abs(transform.linear.d) < 1e-10)  // Double.math.cos(π/2)
         #expect(transform.translation == .zero)
     }
 
