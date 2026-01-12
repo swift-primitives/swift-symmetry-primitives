@@ -18,11 +18,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../swift-algebra-linear-primitives"),
-        .package(path: "../swift-affine-primitives"),
-        .package(path: "../swift-dimension-primitives"),
-        .package(path: "../swift-numeric-primitives"),
-        .package(path: "../swift-test-primitives"),
+        .package(url: "https://github.com/swift-primitives/swift-algebra-linear-primitives.git", from: "0.0.1"),
+        .package(url: "https://github.com/swift-primitives/swift-affine-primitives.git", from: "0.0.1"),
+        .package(url: "https://github.com/swift-primitives/swift-dimension-primitives.git", from: "0.0.1"),
+        .package(url: "https://github.com/swift-primitives/swift-numeric-primitives.git", from: "0.0.1"),
+        .package(url: "https://github.com/swift-primitives/swift-test-primitives.git", from: "0.0.1"),
     ],
     targets: [
         .target(
