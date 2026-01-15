@@ -117,9 +117,9 @@ extension Rotation where N == 2, Scalar: ExpressibleByIntegerLiteral {
     }
 }
 
-// MARK: - 2D Rotation - Generic TranscendentalFloatingPoint
+// MARK: - 2D Rotation - Numeric.Transcendental
 
-extension Rotation where N == 2, Scalar: TranscendentalFloatingPoint {
+extension Rotation where N == 2, Scalar: BinaryFloatingPoint & Numeric.Transcendental {
     /// Rotation angle in radians.
     public var angle: Radian<Scalar> {
         get { Radian(Scalar._atan2(matrix[1][0], matrix[0][0])) }
