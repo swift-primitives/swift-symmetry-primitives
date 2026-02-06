@@ -119,7 +119,7 @@ extension Rotation where N == 2, Scalar: ExpressibleByIntegerLiteral {
 
 // MARK: - 2D Rotation - Numeric.Transcendental
 
-extension Rotation where N == 2, Scalar: BinaryFloatingPoint & Numeric.Transcendental {
+extension Rotation where N == 2, Scalar: BinaryFloatingPoint & Numeric.Transcendental & Sendable {
     /// Rotation angle in radians.
     public var angle: Radian<Scalar> {
         get { Radian(Scalar._atan2(matrix[1][0], matrix[0][0])) }
@@ -195,69 +195,3 @@ extension Rotation where N == 2, Scalar: AdditiveArithmetic & SignedNumeric {
     }
 }
 
-// MARK: - Composition
-
-extension Rotation where N == 2, Scalar: BinaryFloatingPoint {
-    /// Static composition: Multiplies two rotation matrices.
-    ///
-    /// - Parameters:
-    ///   - lhs: Left-hand side rotation
-    ///   - rhs: Right-hand side rotation to apply first
-    /// - Returns: Result of matrix multiplication (rhs applied first, then lhs)
-    @inlinable
-    public static func concatenate(
-        _ lhs: Self,
-        with rhs: Self
-    ) -> Self {
-        // 2x2 matrix multiplication
-        let a = lhs.matrix[0][0] * rhs.matrix[0][0] + lhs.matrix[0][1] * rhs.matrix[1][0]
-        let b = lhs.matrix[0][0] * rhs.matrix[0][1] + lhs.matrix[0][1] * rhs.matrix[1][1]
-        let c = lhs.matrix[1][0] * rhs.matrix[0][0] + lhs.matrix[1][1] * rhs.matrix[1][0]
-        let d = lhs.matrix[1][0] * rhs.matrix[0][1] + lhs.matrix[1][1] * rhs.matrix[1][1]
-        var m = InlineArray<2, InlineArray<2, Scalar>>(
-            repeating: InlineArray<2, Scalar>(repeating: .zero)
-        )
-        m[0][0] = a
-        m[0][1] = b
-        m[1][0] = c
-        m[1][1] = d
-        return Self(matrix: m)
-    }
-}
-
-extension Rotation where N == 2, Scalar: BinaryFloatingPoint {
-    /// Composes two rotations by matrix multiplication.
-    ///
-    /// - Returns: Rotation applying `other` first, then `self`.
-    @inlinable
-    public func concatenating(_ other: Self) -> Self {
-        Self.concatenate(self, with: other)
-    }
-}
-
-extension Rotation where N == 2, Scalar: BinaryFloatingPoint {
-    /// Static inversion: Computes the inverse rotation (transpose for orthogonal matrices).
-    ///
-    /// - Parameter rotation: The rotation to invert
-    /// - Returns: Inverse rotation with transposed matrix
-    @inlinable
-    public static func inverted(_ rotation: Self) -> Self {
-        // For 2D: transpose (inverse = transpose for orthogonal matrices)
-        var m = InlineArray<2, InlineArray<2, Scalar>>(
-            repeating: InlineArray<2, Scalar>(repeating: .zero)
-        )
-        m[0][0] = rotation.matrix[0][0]
-        m[0][1] = rotation.matrix[1][0]
-        m[1][0] = rotation.matrix[0][1]
-        m[1][1] = rotation.matrix[1][1]
-        return Self(matrix: m)
-    }
-}
-
-extension Rotation where N == 2, Scalar: BinaryFloatingPoint {
-    /// Inverse rotation (matrix transpose for orthogonal matrices).
-    @inlinable
-    public var inverted: Self {
-        Self.inverted(self)
-    }
-}
