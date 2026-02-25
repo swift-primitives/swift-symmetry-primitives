@@ -34,7 +34,13 @@ let package = Package(
                 .product(name: "Dimension Primitives", package: "swift-dimension-primitives"),
                 .product(name: "Real Primitives", package: "swift-numeric-primitives")
             ]
-        )
+        ),
+        .testTarget(
+            name: "Symmetry Primitives Tests",
+            dependencies: [
+                "Symmetry Primitives",
+            ]
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
@@ -45,6 +51,7 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
         .enableUpcomingFeature("MemberImportVisibility"),
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
         .enableExperimentalFeature("Lifetimes"),
         .enableExperimentalFeature("SuppressedAssociatedTypes"),
         .enableExperimentalFeature("SuppressedAssociatedTypesWithDefaults"),
