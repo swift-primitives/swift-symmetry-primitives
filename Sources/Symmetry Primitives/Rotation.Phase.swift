@@ -1,5 +1,10 @@
 // Phase.swift
 
+public import Ordinal_Primitives
+public import Cardinal_Primitives
+public import Finite_Primitives
+public import Algebra_Primitives
+
 /// Discrete rotational phases: 0°, 90°, 180°, 270°.
 ///
 /// Represents the cyclic group Z₄ of quarter-turn rotations. Forms a group under
@@ -15,7 +20,7 @@
 /// print(phase.opposite)          // threeQuarter
 /// print(phase.composed(with: .half))  // threeQuarter
 /// ```
-public enum Phase: Ordinal, Sendable, Hashable, CaseIterable {
+public enum Phase: Int, Sendable, Hashable, CaseIterable {
     /// 0° (identity, no rotation).
     case zero = 0
 
@@ -63,12 +68,12 @@ extension Phase: Finite.Enumerable {
 
     /// Ordinal of this value (0: zero, 1: quarter, 2: half, 3: threeQuarter).
     @inlinable
-    public var ordinal: Ordinal { rawValue }
+    public var ordinal: Ordinal { Ordinal(UInt(rawValue)) }
 
     /// Creates a value from its ordinal.
     @inlinable
     public init(__unchecked: Void, ordinal: Ordinal) {
-        self = Phase(rawValue: ordinal)!
+        self = Phase(rawValue: Int(ordinal.rawValue))!
     }
 }
 

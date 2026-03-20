@@ -20,9 +20,14 @@ let package = Package(
     dependencies: [
         .package(path: "../swift-algebra-linear-primitives"),
         .package(path: "../swift-algebra-group-primitives"),
+        .package(path: "../swift-algebra-primitives"),
         .package(path: "../swift-affine-primitives"),
+        .package(path: "../swift-affine-geometry-primitives"),
+        .package(path: "../swift-cardinal-primitives"),
         .package(path: "../swift-dimension-primitives"),
-        .package(path: "../swift-numeric-primitives")
+        .package(path: "../swift-finite-primitives"),
+        .package(path: "../swift-numeric-primitives"),
+        .package(path: "../swift-ordinal-primitives"),
     ],
     targets: [
         .target(
@@ -30,9 +35,14 @@ let package = Package(
             dependencies: [
                 .product(name: "Algebra Linear Primitives", package: "swift-algebra-linear-primitives"),
                 .product(name: "Algebra Group Primitives", package: "swift-algebra-group-primitives"),
+                .product(name: "Algebra Primitives", package: "swift-algebra-primitives"),
                 .product(name: "Affine Primitives", package: "swift-affine-primitives"),
+                .product(name: "Affine Geometry Primitives", package: "swift-affine-geometry-primitives"),
+                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
                 .product(name: "Dimension Primitives", package: "swift-dimension-primitives"),
-                .product(name: "Real Primitives", package: "swift-numeric-primitives")
+                .product(name: "Finite Primitives", package: "swift-finite-primitives"),
+                .product(name: "Real Primitives", package: "swift-numeric-primitives"),
+                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
             ]
         ),
         .testTarget(
