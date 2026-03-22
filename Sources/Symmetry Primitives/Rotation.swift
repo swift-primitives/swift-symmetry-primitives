@@ -4,7 +4,7 @@
 public import Algebra_Linear_Primitives
 public import Dimension_Primitives
 
-public import Real_Primitives
+internal import Real_Primitives
 
 /// An N-dimensional rotation in Euclidean space.
 ///

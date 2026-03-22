@@ -1,7 +1,7 @@
 // Phase.swift
 
 public import Ordinal_Primitives
-public import Cardinal_Primitives
+internal import Cardinal_Primitives
 public import Finite_Primitives
 public import Algebra_Primitives
 
