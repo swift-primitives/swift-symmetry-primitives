@@ -27,11 +27,6 @@ jobs:
   docs:
     uses: swift-institute/.github/.github/workflows/swift-docs.yml@main
     with:
-      umbrella-module: Symmetry_Primitives
-      umbrella-display-name: "Symmetry Primitives"
-      umbrella-bundle-id: "swift-symmetry-primitives.Symmetry-Primitives"
-      umbrella-docc-path: "Sources/Symmetry Primitives/Symmetry Primitives.docc"
-      exclude-modules: ""
       enable-private-repos: true
     secrets:
       PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
