@@ -72,7 +72,7 @@ extension Phase: Finite.Enumerable {
 
     /// Creates a value from its ordinal.
     @inlinable
-    public init(__unchecked: Void, ordinal: Ordinal) {
+    public init(_unchecked: Void, ordinal: Ordinal) {
         self = Phase(rawValue: Int(ordinal.rawValue))!
     }
 }
