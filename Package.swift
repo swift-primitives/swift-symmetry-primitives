@@ -15,7 +15,11 @@ let package = Package(
         .library(
             name: "Symmetry Primitives",
             targets: ["Symmetry Primitives"]
-        )
+        ),
+        .library(
+            name: "Symmetry Primitives Test Support",
+            targets: ["Symmetry Primitives Test Support"]
+        ),
     ],
     dependencies: [
         .package(path: "../swift-algebra-linear-primitives"),
@@ -45,10 +49,19 @@ let package = Package(
                 .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
             ]
         ),
+        .target(
+            name: "Symmetry Primitives Test Support",
+            dependencies: [
+                "Symmetry Primitives",
+                .product(name: "Cardinal Primitives Test Support", package: "swift-cardinal-primitives"),
+            ],
+            path: "Tests/Support"
+        ),
         .testTarget(
             name: "Symmetry Primitives Tests",
             dependencies: [
                 "Symmetry Primitives",
+                "Symmetry Primitives Test Support",
             ]
         ),
     ],
