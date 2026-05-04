@@ -1,9 +1,9 @@
 // Phase.swift
 
-public import Ordinal_Primitives
+public import Algebra_Primitives
 internal import Cardinal_Primitives
 public import Finite_Primitives
-public import Algebra_Primitives
+public import Ordinal_Primitives
 
 /// Discrete rotational phases: 0°, 90°, 180°, 270°.
 ///
@@ -80,5 +80,5 @@ extension Phase: Finite.Enumerable {
 // MARK: - Codable
 
 #if !hasFeature(Embedded)
-extension Phase: Codable {}
+    extension Phase: Codable {}
 #endif

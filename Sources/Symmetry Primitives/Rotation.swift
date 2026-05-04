@@ -3,7 +3,6 @@
 
 public import Algebra_Linear_Primitives
 public import Dimension_Primitives
-
 internal import Real_Primitives
 
 /// An N-dimensional rotation in Euclidean space.
@@ -122,7 +121,7 @@ extension Rotation where N == 2, Scalar: ExpressibleByIntegerLiteral {
 extension Rotation where N == 2, Scalar: BinaryFloatingPoint & Numeric.Transcendental & Sendable {
     /// Rotation angle in radians.
     public var angle: Radian<Scalar> {
-        get { Radian(_unchecked:Scalar._atan2(matrix[1][0], matrix[0][0])) }
+        get { Radian(_unchecked: Scalar._atan2(matrix[1][0], matrix[0][0])) }
         set { self = Self(angle: newValue) }
     }
 
@@ -162,19 +161,19 @@ extension Rotation where N == 2, Scalar: BinaryFloatingPoint & Numeric.Transcend
     /// 90-degree counter-clockwise rotation.
     @inlinable
     public static var quarterTurn: Self {
-        Self(angle: Radian<Scalar>(_unchecked:Scalar.pi / 2))
+        Self(angle: Radian<Scalar>(_unchecked: Scalar.pi / 2))
     }
 
     /// 180-degree rotation.
     @inlinable
     public static var halfTurn: Self {
-        Self(angle: Radian<Scalar>(_unchecked:Scalar.pi))
+        Self(angle: Radian<Scalar>(_unchecked: Scalar.pi))
     }
 
     /// 90-degree clockwise rotation.
     @inlinable
     public static var quarterTurnClockwise: Self {
-        Self(angle: Radian<Scalar>(_unchecked:-Scalar.pi / 2))
+        Self(angle: Radian<Scalar>(_unchecked: -Scalar.pi / 2))
     }
 }
 
@@ -194,4 +193,3 @@ extension Rotation where N == 2, Scalar: AdditiveArithmetic & SignedNumeric {
         self.init(matrix: m)
     }
 }
-

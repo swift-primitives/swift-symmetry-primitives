@@ -12,15 +12,17 @@ extension Phase {
     /// Commutativity holds because integer addition is commutative.
     @inlinable
     public static var group: Algebra.Group<Phase>.Abelian {
-        .init(group: .init(
-            identity: .zero,
-            combining: { lhs, rhs in
-                Phase(rawValue: (lhs.rawValue + rhs.rawValue) % 4)!
-            },
-            inverting: { phase in
-                Phase(rawValue: (4 - phase.rawValue) % 4)!
-            }
-        ))
+        .init(
+            group: .init(
+                identity: .zero,
+                combining: { lhs, rhs in
+                    Phase(rawValue: (lhs.rawValue + rhs.rawValue) % 4)!
+                },
+                inverting: { phase in
+                    Phase(rawValue: (4 - phase.rawValue) % 4)!
+                }
+            )
+        )
     }
 
     /// Composes two phases by adding rotations (modulo 4).
