@@ -24,7 +24,7 @@ let package = Package(
     dependencies: [
         .package(path: "../swift-algebra-linear-primitives"),
         .package(path: "../swift-algebra-group-primitives"),
-        .package(path: "../swift-algebra-primitives"),
+        .package(path: "../swift-pair-primitives"),
         .package(path: "../swift-affine-primitives"),
         .package(path: "../swift-affine-geometry-primitives"),
         .package(path: "../swift-cardinal-primitives"),
@@ -39,7 +39,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Algebra Linear Primitives", package: "swift-algebra-linear-primitives"),
                 .product(name: "Algebra Group Primitives", package: "swift-algebra-group-primitives"),
-                .product(name: "Algebra Primitives", package: "swift-algebra-primitives"),
+                .product(name: "Pair Primitives", package: "swift-pair-primitives"),
                 .product(name: "Affine Primitives", package: "swift-affine-primitives"),
                 .product(name: "Affine Geometry Primitives", package: "swift-affine-geometry-primitives"),
                 .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),

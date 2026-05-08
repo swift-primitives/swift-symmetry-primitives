@@ -1,6 +1,6 @@
 // Phase.swift
 
-public import Algebra_Primitives
+public import Pair_Primitives
 internal import Cardinal_Primitives
 public import Finite_Primitives
 public import Ordinal_Primitives
