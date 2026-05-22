@@ -24,7 +24,7 @@ let package = Package(
     dependencies: [
         .package(path: "../swift-algebra-linear-primitives"),
         .package(path: "../swift-algebra-group-primitives"),
-        .package(path: "../swift-pair-primitives"),
+        .package(url: "https://github.com/swift-primitives/swift-pair-primitives.git", branch: "main"),
         .package(path: "../swift-affine-primitives"),
         .package(path: "../swift-affine-geometry-primitives"),
         .package(path: "../swift-cardinal-primitives"),
