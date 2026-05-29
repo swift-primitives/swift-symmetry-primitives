@@ -22,8 +22,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../swift-algebra-linear-primitives"),
-        .package(path: "../swift-algebra-group-primitives"),
+        .package(path: "../swift-linear-primitives"),
+        .package(path: "../swift-algebra-primitives"),
         .package(url: "https://github.com/swift-primitives/swift-pair-primitives.git", branch: "main"),
         .package(path: "../swift-affine-primitives"),
         .package(path: "../swift-affine-geometry-primitives"),
@@ -37,8 +37,8 @@ let package = Package(
         .target(
             name: "Symmetry Primitives",
             dependencies: [
-                .product(name: "Algebra Linear Primitives", package: "swift-algebra-linear-primitives"),
-                .product(name: "Algebra Group Primitives", package: "swift-algebra-group-primitives"),
+                .product(name: "Linear Primitives", package: "swift-linear-primitives"),
+                .product(name: "Algebra Group Primitives", package: "swift-algebra-primitives"),
                 .product(name: "Pair Primitives", package: "swift-pair-primitives"),
                 .product(name: "Affine Primitives", package: "swift-affine-primitives"),
                 .product(name: "Affine Geometry Primitives", package: "swift-affine-geometry-primitives"),

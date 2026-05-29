@@ -1,7 +1,7 @@
 // Rotation.swift
 // An N-dimensional rotation (element of SO(n), dimensionless).
 
-public import Algebra_Linear_Primitives
+public import Linear_Primitives
 public import Dimension_Primitives
 internal import Real_Primitives
 

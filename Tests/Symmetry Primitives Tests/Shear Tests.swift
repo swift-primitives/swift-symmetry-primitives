@@ -1,6 +1,6 @@
 // Shear Tests.swift
 
-import Algebra_Linear_Primitives
+import Linear_Primitives
 import Testing
 
 @testable import Symmetry_Primitives

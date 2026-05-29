@@ -1,7 +1,7 @@
 // Shear.swift
 // An N-dimensional shear transformation (dimensionless).
 
-public import Algebra_Linear_Primitives
+public import Linear_Primitives
 
 /// An N-dimensional shear transformation parameterized by scalar type.
 ///
