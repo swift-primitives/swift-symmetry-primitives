@@ -1,6 +1,6 @@
 # .github/metadata.yaml
 # Triaged by AI-assisted bulk pass (2026-04-29).
-description: "Symmetry types for Swift."
+description: "Dimensionless Lie-group transformations — rotation, scale, and shear — acting on Euclidean space for Swift."
 topics:
   - primitives
   - symmetry
