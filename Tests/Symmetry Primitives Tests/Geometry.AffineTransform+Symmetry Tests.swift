@@ -1,6 +1,7 @@
 // Geometry.AffineTransform+Symmetry Tests.swift
 
 import Affine_Primitives
+import Affine_Geometry_Primitives
 import Dimension_Primitives
 import Real_Primitives
 import Testing
@@ -15,7 +16,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from rotation creates correct transform`() {
         let rotation = Rotation<2, Double>(angle: Radian<Double>.pi / 4)
-        let transform = Affine<Double, Void>.Transform(rotation)
+        let transform = Affine.Continuous<Double, Void>.Transform(rotation)
 
         // Check linear part matches rotation matrix
         let angle = Double.pi / 4
@@ -34,7 +35,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from identity rotation creates identity transform`() {
         let rotation = Rotation<2, Double>.identity
-        let transform = Affine<Double, Void>.Transform(rotation)
+        let transform = Affine.Continuous<Double, Void>.Transform(rotation)
 
         #expect(transform.linear.a == 1)
         #expect(transform.linear.b == 0)
@@ -46,7 +47,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from quarter turn rotation`() {
         let rotation = Rotation<2, Double>.quarterTurn
-        let transform = Affine<Double, Void>.Transform(rotation)
+        let transform = Affine.Continuous<Double, Void>.Transform(rotation)
 
         // 90 degrees: Double.math.cos(π/2) ≈ 0, Double.math.sin(π/2) ≈ 1
         #expect(abs(transform.linear.a) < 1e-10)  // Double.math.cos(π/2)
@@ -61,7 +62,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from scale creates correct transform`() {
         let scale = Scale<2, Double>(x: 2.0, y: 3.0)
-        let transform = Affine<Double, Void>.Transform(scale)
+        let transform = Affine.Continuous<Double, Void>.Transform(scale)
 
         #expect(transform.linear.a == 2.0)
         #expect(transform.linear.b == 0)
@@ -73,7 +74,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from identity scale creates identity transform`() {
         let scale = Scale<2, Double>.identity
-        let transform = Affine<Double, Void>.Transform(scale)
+        let transform = Affine.Continuous<Double, Void>.Transform(scale)
 
         #expect(transform.linear.a == 1)
         #expect(transform.linear.b == 0)
@@ -85,7 +86,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from uniform scale`() {
         let scale = Scale<2, Double>.uniform(2.5)
-        let transform = Affine<Double, Void>.Transform(scale)
+        let transform = Affine.Continuous<Double, Void>.Transform(scale)
 
         #expect(transform.linear.a == 2.5)
         #expect(transform.linear.b == 0)
@@ -97,7 +98,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from double scale`() {
         let scale = Scale<2, Double>.double
-        let transform = Affine<Double, Void>.Transform(scale)
+        let transform = Affine.Continuous<Double, Void>.Transform(scale)
 
         #expect(transform.linear.a == 2)
         #expect(transform.linear.b == 0)
@@ -108,7 +109,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from half scale`() {
         let scale = Scale<2, Double>.half
-        let transform = Affine<Double, Void>.Transform(scale)
+        let transform = Affine.Continuous<Double, Void>.Transform(scale)
 
         #expect(transform.linear.a == 0.5)
         #expect(transform.linear.b == 0)
@@ -121,7 +122,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from shear creates correct transform`() {
         let shear = Shear<2, Double>(x: 0.5, y: 0.3)
-        let transform = Affine<Double, Void>.Transform(shear)
+        let transform = Affine.Continuous<Double, Void>.Transform(shear)
 
         #expect(transform.linear.a == 1)
         #expect(transform.linear.b == 0.5)
@@ -133,7 +134,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from identity shear creates identity transform`() {
         let shear = Shear<2, Double>.identity
-        let transform = Affine<Double, Void>.Transform(shear)
+        let transform = Affine.Continuous<Double, Void>.Transform(shear)
 
         #expect(transform.linear.a == 1)
         #expect(transform.linear.b == 0)
@@ -145,7 +146,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from horizontal shear`() {
         let shear = Shear<2, Double>.horizontal(0.7)
-        let transform = Affine<Double, Void>.Transform(shear)
+        let transform = Affine.Continuous<Double, Void>.Transform(shear)
 
         #expect(transform.linear.a == 1)
         #expect(transform.linear.b == 0.7)
@@ -156,7 +157,7 @@ struct `Geometry.AffineTransform+Symmetry Tests` {
     @Test
     func `Initialize from vertical shear`() {
         let shear = Shear<2, Double>.vertical(0.4)
-        let transform = Affine<Double, Void>.Transform(shear)
+        let transform = Affine.Continuous<Double, Void>.Transform(shear)
 
         #expect(transform.linear.a == 1)
         #expect(transform.linear.b == 0)

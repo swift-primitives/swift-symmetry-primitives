@@ -79,7 +79,7 @@ struct `Rotation Tests` {
     func `Static concatenate composes rotations`() {
         let rotation1 = Rotation<2, Double>(angle: .pi / 4)  // 45°
         let rotation2 = Rotation<2, Double>(angle: .pi / 4)  // 45°
-        let result = Rotation.concatenate(rotation1, with: rotation2)
+        let result = rotation1.concatenating(rotation2)
 
         // Should equal 90° rotation
         let bool = abs(result.angle - .pi / 2) < 1e-10
@@ -90,7 +90,7 @@ struct `Rotation Tests` {
     func `Static concatenate with identity returns original`() {
         let rotation = Rotation<2, Double>(angle: .pi / 3)
         let identity = Rotation<2, Double>.identity
-        let result = Rotation.concatenate(rotation, with: identity)
+        let result = rotation.concatenating(identity)
 
         #expect(abs(result.angle - rotation.angle) < 1e-10)
     }
@@ -111,7 +111,7 @@ struct `Rotation Tests` {
     @Test
     func `Static inverted returns inverse rotation`() {
         let rotation = Rotation<2, Double>(angle: .pi / 4)
-        let inverted = Rotation.inverted(rotation)
+        let inverted = rotation.inverted
 
         #expect(abs(inverted.angle + rotation.angle) < 1e-10)
     }
@@ -119,7 +119,7 @@ struct `Rotation Tests` {
     @Test
     func `Static inverted of identity is identity`() {
         let identity = Rotation<2, Double>.identity
-        let inverted = Rotation.inverted(identity)
+        let inverted = identity.inverted
 
         #expect(inverted.matrix[0][0] == 1)
         #expect(inverted.matrix[1][1] == 1)
@@ -138,8 +138,8 @@ struct `Rotation Tests` {
     @Test
     func `Composition with inverse yields identity`() {
         let rotation = Rotation<2, Double>(angle: .pi / 5)
-        let inverted = Rotation.inverted(rotation)
-        let result = Rotation.concatenate(rotation, with: inverted)
+        let inverted = rotation.inverted
+        let result = rotation.concatenating(inverted)
 
         // Result should be identity
         #expect(abs(result.matrix[0][0] - 1) < 1e-10)
