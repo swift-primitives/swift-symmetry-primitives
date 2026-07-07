@@ -1,9 +1,9 @@
 // Phase.swift
 
-public import Pair_Primitives
 internal import Cardinal_Primitives
 public import Finite_Primitives
 public import Ordinal_Primitives
+public import Pair_Primitives
 
 /// Discrete rotational phases: 0°, 90°, 180°, 270°.
 ///
@@ -73,7 +73,10 @@ extension Phase: Finite.Enumerable {
     /// Creates a value from its ordinal.
     @inlinable
     public init(_unchecked: Void, ordinal: Ordinal) {
-        self = Phase(rawValue: Int(ordinal.rawValue))!
+        guard let value = Phase(rawValue: Int(ordinal.rawValue)) else {
+            preconditionFailure("Phase ordinal is always in 0...3")
+        }
+        self = value
     }
 }
 

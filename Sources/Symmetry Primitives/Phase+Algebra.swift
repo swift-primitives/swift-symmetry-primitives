@@ -16,10 +16,16 @@ extension Phase {
             group: .init(
                 identity: .zero,
                 combining: { lhs, rhs in
-                    Phase(rawValue: (lhs.rawValue + rhs.rawValue) % 4)!
+                    guard let result = Phase(rawValue: (lhs.rawValue + rhs.rawValue) % 4) else {
+                        preconditionFailure("Phase rawValue mod 4 is always in 0...3")
+                    }
+                    return result
                 },
                 inverting: { phase in
-                    Phase(rawValue: (4 - phase.rawValue) % 4)!
+                    guard let result = Phase(rawValue: (4 - phase.rawValue) % 4) else {
+                        preconditionFailure("Phase rawValue mod 4 is always in 0...3")
+                    }
+                    return result
                 }
             )
         )

@@ -1,8 +1,8 @@
 // Rotation Tests.swift
 
 import Affine_Primitives
-import Linear_Primitives
 import Dimension_Primitives
+import Linear_Primitives
 import Real_Primitives
 import Testing
 

@@ -36,6 +36,7 @@ extension Shear: Sendable where Scalar: Sendable {}
 // MARK: - Equatable (2D)
 
 extension Shear: Equatable where N == 2 {
+    /// Compares two shears by their x and y factors.
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.x == rhs.x && lhs.y == rhs.y
@@ -45,6 +46,7 @@ extension Shear: Equatable where N == 2 {
 // MARK: - Hashable (2D)
 
 extension Shear: Hashable where N == 2, Scalar: Hashable {
+    /// Feeds this shear's x and y factors into `hasher`.
     @inlinable
     public func hash(into hasher: inout Hasher) {
         hasher.combine(x)
@@ -60,18 +62,28 @@ extension Shear: Hashable where N == 2, Scalar: Hashable {
             case x, y
         }
 
+        // reason: signature forced by external protocol Swift.Decodable —
+        // init(from:) requires untyped throws and an existential decoder.
+        // swiftlint:disable no_any_protocol_existential typed_throws_required
+        /// Decodes a shear from its keyed x and y factors.
         public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             let x = try container.decode(Scalar.self, forKey: .x)
             let y = try container.decode(Scalar.self, forKey: .y)
             self.init(x: x, y: y)
         }
+        // swiftlint:enable no_any_protocol_existential typed_throws_required
 
+        // reason: signature forced by external protocol Swift.Encodable —
+        // encode(to:) requires untyped throws and an existential encoder.
+        // swiftlint:disable no_any_protocol_existential typed_throws_required
+        /// Encodes this shear as its keyed x and y factors.
         public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(x, forKey: .x)
             try container.encode(y, forKey: .y)
         }
+        // swiftlint:enable no_any_protocol_existential typed_throws_required
     }
 #endif
 

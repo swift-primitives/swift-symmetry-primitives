@@ -1,7 +1,7 @@
 // Geometry.AffineTransform+Symmetry Tests.swift
 
-import Affine_Primitives
 import Affine_Geometry_Primitives
+import Affine_Primitives
 import Dimension_Primitives
 import Real_Primitives
 import Testing

@@ -1,8 +1,8 @@
 // Rotation.swift
 // An N-dimensional rotation (element of SO(n), dimensionless).
 
-public import Linear_Primitives
 public import Dimension_Primitives
+public import Linear_Primitives
 internal import Real_Primitives
 
 /// An N-dimensional rotation in Euclidean space.
@@ -37,6 +37,7 @@ extension Rotation: Sendable where Scalar: Sendable {}
 // MARK: - Equatable (2D)
 
 extension Rotation: Equatable where N == 2, Scalar: Equatable {
+    /// Compares two rotations by their matrix entries.
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.matrix[0][0] == rhs.matrix[0][0] && lhs.matrix[0][1] == rhs.matrix[0][1]
@@ -47,6 +48,7 @@ extension Rotation: Equatable where N == 2, Scalar: Equatable {
 // MARK: - Hashable (2D)
 
 extension Rotation: Hashable where N == 2, Scalar: Hashable {
+    /// Feeds this rotation's matrix entries into `hasher`.
     @inlinable
     public func hash(into hasher: inout Hasher) {
         hasher.combine(matrix[0][0])
@@ -64,6 +66,10 @@ extension Rotation: Hashable where N == 2, Scalar: Hashable {
             case a, b, c, d
         }
 
+        // reason: signature forced by external protocol Swift.Decodable —
+        // init(from:) requires untyped throws and an existential decoder.
+        // swiftlint:disable no_any_protocol_existential typed_throws_required
+        /// Decodes a rotation from its keyed matrix entries.
         public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             let a = try container.decode(Scalar.self, forKey: .a)
@@ -79,7 +85,12 @@ extension Rotation: Hashable where N == 2, Scalar: Hashable {
             m[1][1] = d
             self.init(matrix: m)
         }
+        // swiftlint:enable no_any_protocol_existential typed_throws_required
 
+        // reason: signature forced by external protocol Swift.Encodable —
+        // encode(to:) requires untyped throws and an existential encoder.
+        // swiftlint:disable no_any_protocol_existential typed_throws_required
+        /// Encodes this rotation as its keyed matrix entries.
         public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(matrix[0][0], forKey: .a)
@@ -87,6 +98,7 @@ extension Rotation: Hashable where N == 2, Scalar: Hashable {
             try container.encode(matrix[1][0], forKey: .c)
             try container.encode(matrix[1][1], forKey: .d)
         }
+        // swiftlint:enable no_any_protocol_existential typed_throws_required
     }
 #endif
 

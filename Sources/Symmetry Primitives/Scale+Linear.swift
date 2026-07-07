@@ -1,8 +1,8 @@
 // Scale+Linear.swift
 // Linear matrix conversion for Scale.
 
-public import Linear_Primitives
 public import Dimension_Primitives
+public import Linear_Primitives
 
 // MARK: - Conversion to Linear
 
